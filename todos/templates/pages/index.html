@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Todos App!
+    </title>
+</head>
+
+<body>
+    Logged in as {{ user.username }} <a href="{% url 'logout' %}">Log out</a>
+    <h2>Your todos</h2>
+    <ul>
+        {% for own_todo in own_todos %}
+        <li>{{ own_todo.description }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Assigned todos</h2>
+    <ul>
+        {% for assigned_todo in assigned_todos %}
+        <li>{{ assigned_todo.description }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/todos/create" method="POSt">
+        {% csrf_token %}
+        <input type="text" name="description" />
+        <input type="submit" value="add" />
+    </form>
+</body>
+
+</html>
