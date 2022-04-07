@@ -12,21 +12,50 @@
     <h2>Your todos</h2>
     <ul>
         {% for own_todo in own_todos %}
-        <li>{{ own_todo.description }}</li>
+        <li>{{ own_todo.description }} <a href="javascript:void(0)" onclick="edit_todo({{own_todo.id}})">edit</a></li>
         {% endfor %}
     </ul>
     <h2>Assigned todos</h2>
     <ul>
         {% for assigned_todo in assigned_todos %}
-        <li>{{ assigned_todo.description }}</li>
+        <li>{{ assigned_todo.description }} <a href="status?todo={{assigned_todo.id}}">{{assigned_todo.done|yesno:"completed,in progress"}}</a></li>
         {% endfor %}
     </ul>
 
-    <form action="/todos/create" method="POSt">
+    <form action="/todos/create" method="POST" id="the_form">
         {% csrf_token %}
-        <input type="text" name="description" />
-        <input type="submit" value="add" />
+        <input type="hidden" id="todo_id" name="id" value="0" />
+        <div>
+            <label for="assign_to">
+                Assign to
+            </label>
+            <select name="assign_to" id="assign_to">
+                {% for user in users %}
+                <option value="{{user}}">{{user}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="description">
+                Todo:
+            </label>
+            <textarea name="description" id="description"></textarea>
+        </div>
+        <div>
+            <input id="submit_button" type="submit" value="add" />
+        </div>
     </form>
+    <script>
+        async function edit_todo(id) {
+            const response = await fetch(`/todos/todo?id=${id}`);
+            const todo = await response.json();
+            document.getElementById('todo_id').value=todo.id;
+            document.getElementById('assign_to').value=todo.assigned_to;
+            document.getElementById('description').innerText=todo.description;
+            document.getElementById('the_form').action = '/todos/update';
+            document.getElementById('submit_button').value='update';
+        }
+    </script>
 </body>
 
 </html>
