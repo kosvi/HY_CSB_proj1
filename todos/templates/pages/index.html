@@ -12,13 +12,20 @@
     <h2>Your todos</h2>
     <ul>
         {% for own_todo in own_todos %}
-        <li>{{ own_todo.description }} <a href="javascript:void(0)" onclick="edit_todo({{own_todo.id}})">edit</a></li>
+        <li>
+            {{ own_todo.description |safe }} 
+            <a href="javascript:void(0)" onclick="edit_todo({{own_todo.id}})">edit</a>
+            <form action="/todos/delete" method="POST">
+                <input type="hidden" name="id" value="{{own_todo.id}}" />
+                <input type="submit" value="delete" />
+            </form>
+        </li>
         {% endfor %}
     </ul>
     <h2>Assigned todos</h2>
     <ul>
         {% for assigned_todo in assigned_todos %}
-        <li>{{ assigned_todo.description }} <a href="status?todo={{assigned_todo.id}}">{{assigned_todo.done|yesno:"completed,in progress"}}</a></li>
+        <li>{{ assigned_todo.description |safe }} <a href="status?todo={{assigned_todo.id}}">{{assigned_todo.done|yesno:"completed,in progress"}}</a></li>
         {% endfor %}
     </ul>
 
@@ -30,8 +37,8 @@
                 Assign to
             </label>
             <select name="assign_to" id="assign_to">
-                {% for user in users %}
-                <option value="{{user}}">{{user}}</option>
+                {% for u in users %}
+                <option value="{{u}}" {% if u.username == user.username %}selected="selected"{% endif %}>{{u}}</option>
                 {% endfor %}
             </select>
         </div>
