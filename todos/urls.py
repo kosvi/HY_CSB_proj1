@@ -8,4 +8,5 @@ urlpatterns = [
     path('update', views.update_todo, name='update_todo'),
     path('delete', views.delete_todo, name='delete_todo'),
     path('todo', views.get_todo, name='get_todo'),
+    path('reset', views.reset_db_endpoint, name='reset_db'),
 ]

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 
+<!-- This file is just quickly hacked garbage, don't spend time reading it and trying to understand it -->
+
 <head>
     <title>
         Todos App!
@@ -14,8 +16,9 @@
         {% for own_todo in own_todos %}
         <li>
             {{ own_todo.description |safe }} 
-            <a href="javascript:void(0)" onclick="edit_todo({{own_todo.id}})">edit</a>
-            <form action="/todos/delete" method="POST">
+            <button onclick="edit_todo({{own_todo.id}})">edit</button> 
+            <form action="/todos/delete" method="POST" style="display: inline-block">
+                {% csrf_token %}
                 <input type="hidden" name="id" value="{{own_todo.id}}" />
                 <input type="submit" value="delete" />
             </form>
