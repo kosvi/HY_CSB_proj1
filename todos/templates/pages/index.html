@@ -17,7 +17,7 @@
         <li>
             {{ own_todo.description |safe }} 
             <button onclick="edit_todo({{own_todo.id}})">edit</button> 
-            <form action="/todos/delete" method="POST" style="display: inline-block">
+            <form action="/todos/delete" method="GET" style="display: inline-block">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{own_todo.id}}" />
                 <input type="submit" value="delete" />

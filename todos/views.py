@@ -52,7 +52,7 @@ def update_todo(request):
 @csrf_exempt
 @login_required
 def delete_todo(request):
-    todo = Todo.objects.get(pk=request.POST.get('id'))
+    todo = Todo.objects.get(pk=request.GET.get('id'))
     if todo.owner == request.user:
         todo.delete()
     return redirect("/todos")
