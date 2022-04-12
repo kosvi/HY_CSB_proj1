@@ -47,9 +47,7 @@ def update_todo(request):
         todo.save()
     return redirect("/todos")
 
-# there are cases where csrf_exempt can be needed, 
-# but this most certainly is not the case. 
-@csrf_exempt
+# @csrf_exempt
 @login_required
 def delete_todo(request):
     todo = Todo.objects.get(pk=request.GET.get('id'))

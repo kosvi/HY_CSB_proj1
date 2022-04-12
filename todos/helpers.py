@@ -47,7 +47,7 @@ def reset_db():
     remove_all_todos(conn)
     remove_all_users(conn)
     conn.close()
-    chase = add_user_after_reset("chase", "chase", "chase@example.com", True)
+    chase = add_user_after_reset("chase", "chase02", "chase@example.com", True)
     marshall = add_user_after_reset("marshall", "happypuppy", "mashall@example.com")
     skye = add_user_after_reset("skye", "skye04", "skye@example.com")
     add_todo_after_reset(chase, marshall, "take a bath")
