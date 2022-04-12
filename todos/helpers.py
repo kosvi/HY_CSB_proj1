@@ -50,5 +50,7 @@ def reset_db():
     chase = add_user_after_reset("chase", "chase02", "chase@example.com", True)
     marshall = add_user_after_reset("marshall", "happypuppy", "mashall@example.com")
     skye = add_user_after_reset("skye", "skye04", "skye@example.com")
-    add_todo_after_reset(chase, marshall, "take a bath")
+    you = add_user_after_reset("you", "you", "you@example.com")
+    add_todo_after_reset(skye, chase, "take a bath")
     add_todo_after_reset(marshall, skye, "fly", True)
+    add_todo_after_reset(chase, you, "some stupid chore")
